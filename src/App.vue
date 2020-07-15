@@ -8,15 +8,13 @@
         <span></span>
         <span></span>
         <ul class="nav__list" id="menu">
-          <li class="nav__item" v-for="item in menu" :key="item.id">
-            <a
-              class="nav__link"
-              href="#"
-              @click="openContent = !openContent"
-              v-for="(item, index) in menu"
-              :key="item"
-              v-show="index === active"
-            >
+          <li
+            class="nav__item"
+            v-for="(item, index) in menu"
+            :key="item.id"
+            v-bind:class="{active: index == active}"
+          >
+            <a class="nav__link" href="#" @click="active = index">
               <div class="nav__title">
                 {{item.menu_title}}
                 <p class="nav__subtitle">{{item.menu_subtitle}} &nbsp;</p>
@@ -60,6 +58,9 @@ body {
   font-style: normal;
   font-weight: 400;
 }
+.nav__item.active {
+  background-color: aqua;
+}
 </style>
 
 <script>
@@ -70,6 +71,7 @@ export default {
   },
   data() {
     return {
+      active: 1,
       openContent: false,
       menu: [
         {
