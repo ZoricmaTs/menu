@@ -1,11 +1,11 @@
 <template>
   <section class="content">
-    <img class="content__img" :src="image_url" />
+    <img class="content__img" :src="item.image_url" v-if="item.image_url" />
     <div class="content__block-text">
-      <header class="content__header">{{item.header}}</header>
-      <p class="content__short-text">{{item.short_text}}</p>
-      <p class="content__full-text">{{item.full_text}}</p>
-      <button class="content__btn">{{ item.full_text_btn_title }}</button>
+      <header class="content__header" v-if="item.header">{{item.header}}</header>
+      <p class="content__short-text" v-if="item.short_text">{{item.short_text}}</p>
+      <span class="content__full-text" v-if="item.full_text">{{item.full_text}}</span>
+      <button class="content__btn" v-if="item.full_text_btn_title">{{ item.full_text_btn_title }}</button>
     </div>
   </section>
 </template>
@@ -17,7 +17,8 @@ export default {
   },
   data() {
     return {};
-  }
+  },
+  methods: {}
 };
 </script>
 

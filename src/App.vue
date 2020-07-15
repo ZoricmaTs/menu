@@ -1,29 +1,25 @@
 <template>
-  <div>
-    <nav role="navigation">
-      <div id="menuToggle">
-        <input type="checkbox" />
+  <div class="page">
+    <input type="checkbox" id="nav-toggle" hidden />
 
-        <span></span>
-        <span></span>
-        <span></span>
-        <ul class="nav__list" id="menu">
-          <li
-            class="nav__item"
-            v-for="(item, index) in menu"
-            :key="item.id"
-            v-bind:class="{active: index == active}"
-          >
-            <a class="nav__link" href="#" @click="active = index">
-              <div class="nav__title">
-                {{item.menu_title}}
-                <p class="nav__subtitle">{{item.menu_subtitle}} &nbsp;</p>
-              </div>
-              <div class="nav__arrow material-icons">navigate_next</div>
-            </a>
-          </li>
-        </ul>
-      </div>
+    <nav class="nav">
+      <label for="nav-toggle" class="nav-toggle" onclick></label>
+      <ul class="nav__list">
+        <li
+          class="nav__item"
+          v-for="(item, index) in menu"
+          :key="item.id"
+          v-bind:class="{active: index == active}"
+        >
+          <a class="nav__link" href="#" @click="active = index">
+            <div class="nav__title">
+              {{item.menu_title}}
+              <p class="nav__subtitle">{{item.menu_subtitle}} &nbsp;</p>
+            </div>
+            <div class="nav__arrow material-icons">navigate_next</div>
+          </a>
+        </li>
+      </ul>
     </nav>
 
     <section class="body-block">
@@ -33,15 +29,9 @@
           <span class="screen-size__vers material-icons">tablet_mac</span>
           <span class="screen-size__vers material-icons">tv</span>
         </div>
+        <div class="screen-size__line">&nbsp;</div>
       </div>
-      <div class="screen-size__line"></div>
-      <!-- <Content
-        @click="openContent = !openContent"
-        v-for="(item, index) in menu"
-        :key="item"
-        v-show="index === active"
-        
-      />-->
+
       <Content v-bind:item="menu[active].content" />
     </section>
     <router-view />
@@ -50,6 +40,9 @@
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,
+  300&subset=latin,
+  cyrillic");
 @import "@/assets/scss/style.scss";
 * {
   margin: 0;
@@ -59,9 +52,10 @@ body {
   font-family: "Raleway", sans-serif;
   font-style: normal;
   font-weight: 400;
+  -webkit-animation: bugfix infinite 1s;
 }
 .nav__item.active {
-  background-color: aqua;
+  background-color: #141413;
 }
 </style>
 
@@ -86,7 +80,8 @@ export default {
               "Suspendisse fringilla dui nulla, sit amet fermentum nunc consectetur eget.",
             full_text:
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            image_url: "/path/to/image/file.png",
+            image_url:
+              "https://img5.goodfon.ru/wallpaper/nbig/b/3b/window-desk-watches-notebook-smartphone-headphones.jpg",
             full_text_btn_title: "Learn more"
           }
         },
@@ -100,7 +95,8 @@ export default {
               "Suspendisse fringilla dui nulla, sit amet fermentum nunc consectetur eget. In vitae nulla a est tristique porttitor.",
             full_text:
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            image_url: "/path/to/image/file2.png",
+            image_url:
+              "https://img2.goodfon.ru/wallpaper/nbig/9/44/notebook-tablet-mouse-desk.jpg",
             full_text_btn_title: "Get more products"
           }
         },
@@ -112,7 +108,8 @@ export default {
             header: "Contacts",
             short_text: "Phone:  8-800-555-3555 \nEmail: some_email@domain.com",
             full_text: "",
-            image_url: "/path/to/image/file3.png",
+            image_url:
+              "https://img5.goodfon.ru/wallpaper/nbig/4/65/wallpaper-computer-room-desktop.jpg",
             full_text_btn_title: "Learn more"
           }
         },
