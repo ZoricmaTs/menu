@@ -1,0 +1,229 @@
+.body-block {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.screen-size {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 68px;
+  background-color: #ffffff;
+  &__vers {
+    margin: auto;
+    padding: 10px;
+    font-size: 48px;
+  }
+}
+
+.screen-size__vers:last-child {
+  padding: 10px;
+  background-color: #e5e5e5;
+}
+
+.screen-size__line {
+  background-color: #232323;
+  height: 68px;
+}
+
+#menuToggle {
+  display: block;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  z-index: 1;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#menuToggle input {
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  cursor: pointer;
+  opacity: 0;
+  z-index: 2; /* and place it over the hamburger */
+  -webkit-touch-callout: none;
+}
+
+#menuToggle span {
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  background: #cdcdcd;
+  border-radius: 3px;
+  z-index: 1;
+  //   transform-origin: 4px 0px;
+  //   transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+  //     background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+}
+
+//1
+#menuToggle span:first-child {
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2) {
+  transform-origin: 0% 100%;
+}
+
+#menuToggle input:checked ~ span {
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  background: #cdcdcd;
+  border-radius: 3px;
+  z-index: 1;
+  transform-origin: 4px 0px;
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+    background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+  opacity: 1;
+  //   transform: rotate(45deg) translate(-2px, -1px);
+  //   background: #232323;
+}
+
+#menuToggle input:checked ~ span:nth-last-child(3) {
+  //   opacity: 0;
+  //   transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+#menuToggle input:checked ~ span:nth-last-child(2) {
+  opacity: 1;
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+#menu {
+  position: absolute;
+  width: 300px;
+  height: 100vh;
+  margin: -100px 0 0 0;
+  // padding-top: 125px;
+  margin-left: 20px;
+  left: -370px;
+
+  background: #232323;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  /* to stop flickering of text in safari */
+  transform-origin: 0% 0%;
+  transform: translate(100%, 0);
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+}
+
+/*
+   * And let's fade it in from the left
+   */
+#menuToggle input:checked ~ ul {
+  transform: scale(1, 1);
+  opacity: 0;
+}
+
+.nav {
+  &__list {
+    padding-top: 125px;
+    list-style: none;
+  }
+  &__item {
+    padding: 10px 20px 20px 20px;
+    &:active,
+    &:hover,
+    &:focus {
+      background-color: #141413;
+    }
+  }
+  &__link {
+    display: inline;
+    color: #e5e5e5;
+    text-decoration: none;
+  }
+  &__arrow {
+    display: inline-block;
+    float: right;
+    color: #e5e5e5;
+    font-size: 48px;
+  }
+  &__title {
+    display: inline-block;
+    font-size: 22px;
+  }
+  &__subtitle {
+    font-size: 19px;
+    opacity: 0.5;
+  }
+}
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: calc(100vh - 136px);
+  background-color: orangered;
+  color: #e5e5e5;
+  text-transform: uppercase;
+  &__img {
+    height: 300px;
+    width: auto;
+    margin: 0 50px;
+  }
+  &__block-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    max-width: 400px;
+    margin: 0 50px;
+  }
+  &__header {
+    display: block;
+    font-size: 2.5rem;
+  }
+  &__short-text {
+    display: block;
+  }
+  &__full-text {
+    display: block;
+  }
+  &__btn {
+    display: block;
+    padding: 15px;
+    background-color: transparent;
+    border: 3px solid #e5e5e5;
+    text-transform: uppercase;
+    color: #e5e5e5;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .screen-size {
+    &__vers:last-child {
+      padding: 10px;
+      background-color: #ffffff;
+    }
+    &__vers:nth-child(2n) {
+      padding: 10px;
+      background-color: #e5e5e5;
+    }
+  }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .screen-size {
+    &__vers:last-child {
+      padding: 10px;
+      background-color: #ffffff;
+    }
+    &__vers:first-child {
+      padding: 10px;
+      background-color: #e5e5e5;
+    }
+  }
+}
