@@ -5,14 +5,22 @@
       <header class="content__header">Drag and drop website builder</header>
       <p class="content__short-text">Make you own website in a few clicks!fdgdfgdfgdg</p>
       <p class="content__full-text">&nbsp;</p>
-      <button class="content__btn">learn more</button>
+      <button
+        class="content__btn"
+        :full_text_btn_title="this.full_text_btn_title"
+      >{{ this.full_text_btn_title }}</button>
     </div>
   </section>
 </template>
 
 <script>
 export default {
-  props: {},
+  props: {
+    header: { type: String },
+    short_text: { type: String },
+    full_text: { type: String },
+    image_url: { type: String }
+  },
   data() {
     return {};
   }

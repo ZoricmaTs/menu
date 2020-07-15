@@ -9,7 +9,14 @@
         <span></span>
         <ul class="nav__list" id="menu">
           <li class="nav__item" v-for="item in menu" :key="item.id">
-            <a class="nav__link" href="#">
+            <a
+              class="nav__link"
+              href="#"
+              @click="openContent = !openContent"
+              v-for="(item, index) in menu"
+              :key="item"
+              v-show="index === active"
+            >
               <div class="nav__title">
                 {{item.menu_title}}
                 <p class="nav__subtitle">{{item.menu_subtitle}} &nbsp;</p>
@@ -30,7 +37,12 @@
         </div>
       </div>
       <div class="screen-size__line"></div>
-      <Content :menu="this.menu_title[this.active]" />
+      <Content
+        @click="openContent = !openContent"
+        v-for="(item, index) in menu"
+        :key="item"
+        v-show="index === active"
+      />
     </section>
     <router-view />
   </div>
@@ -58,6 +70,7 @@ export default {
   },
   data() {
     return {
+      openContent: false,
       menu: [
         {
           id: 1,
