@@ -35,12 +35,14 @@
         </div>
       </div>
       <div class="screen-size__line"></div>
-      <Content
+      <!-- <Content
         @click="openContent = !openContent"
         v-for="(item, index) in menu"
         :key="item"
         v-show="index === active"
-      />
+        
+      />-->
+      <Content v-bind:item="menu[active].content" />
     </section>
     <router-view />
   </div>
@@ -128,7 +130,7 @@ export default {
           }
         },
         {
-          id: 4,
+          id: 5,
           menu_title: "Thank you",
           menu_subtitle: "",
           content: {}
@@ -136,12 +138,7 @@ export default {
       ]
     };
   },
-  methods: {
-    change(index) {
-      this.invert = index < this.active;
-      this.active = (index + this.total) % this.total;
-    }
-  },
+  methods: {},
   mounted() {},
   computed: {
     total() {
