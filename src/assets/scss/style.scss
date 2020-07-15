@@ -93,6 +93,7 @@
   &:after {
     content: "\2630";
     text-decoration: none;
+    color: #232323;
   }
   &:hover {
     color: #f4f4f4;
@@ -120,6 +121,7 @@
 
 [id="nav-toggle"]:checked ~ .nav > .nav-toggle:after {
   content: "\2715";
+  color: #f4f4f4;
 }
 
 ::-webkit-scrollbar {
