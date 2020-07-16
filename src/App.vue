@@ -11,7 +11,7 @@
           :key="item.id"
           v-bind:class="{active: index == active}"
         >
-          <a class="nav__link" href="#" @click="active = index">
+          <a class="nav__link" href="#" @click="selectMenu(index)">
             <div class="nav__title">
               {{item.menu_title}}
               <p class="nav__subtitle">{{item.menu_subtitle}} &nbsp;</p>
@@ -32,7 +32,7 @@
         <div class="screen-size__line">&nbsp;</div>
       </div>
 
-      <Content v-bind:item="menu[active].content" />
+      <Content v-bind:item="activeContent" />
     </section>
     <router-view />
   </div>
@@ -68,86 +68,61 @@ export default {
   },
   data() {
     return {
-      baseUrl: process.env.VUE_APP_BASE_URL,
       active: 1,
+      activeContent: {},
       openContent: false,
-      menu: [
-        {
-          id: 1,
-          menu_title: "Main page",
-          menu_subtitle: "About us",
-          content: {
-            header: "Lorem ipsum",
-            short_text:
-              "Suspendisse fringilla dui nulla, sit amet fermentum nunc consectetur eget.",
-            full_text:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            image_url:
-              "https://img5.goodfon.ru/wallpaper/nbig/b/3b/window-desk-watches-notebook-smartphone-headphones.jpg",
-            full_text_btn_title: "Learn more"
-          }
-        },
-        {
-          id: 2,
-          menu_title: "Shop",
-          menu_subtitle: "Our products to buy",
-          content: {
-            header: "Products",
-            short_text:
-              "Suspendisse fringilla dui nulla, sit amet fermentum nunc consectetur eget. In vitae nulla a est tristique porttitor.",
-            full_text:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            image_url:
-              "https://img2.goodfon.ru/wallpaper/nbig/9/44/notebook-tablet-mouse-desk.jpg",
-            full_text_btn_title: "Get more products"
-          }
-        },
-        {
-          id: 3,
-          menu_title: "Contacts",
-          menu_subtitle: "Call us",
-          content: {
-            header: "Contacts",
-            short_text: "Phone:  8-800-555-3555 \nEmail: some_email@domain.com",
-            full_text: "",
-            image_url:
-              "https://img5.goodfon.ru/wallpaper/nbig/4/65/wallpaper-computer-room-desktop.jpg",
-            full_text_btn_title: "Learn more"
-          }
-        },
-        {
-          id: 4,
-          menu_title: "Thank you",
-          menu_subtitle: "",
-          content: {
-            header: "Thank you",
-            short_text: "We will be glad to see you again",
-            full_text:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            image_url: "",
-            full_text_btn_title: ""
-          }
-        },
-        {
-          id: 5,
-          menu_title: "Thank you",
-          menu_subtitle: "",
-          content: {}
-        }
-      ]
+      menu: []
     };
   },
   methods: {
-    async fetchData() {
+    fetchData() {
       axios.get("http://localhost:8080/file.json").then(response => {
-        this.jsonFile = response.data;
         this.menu = response.data.menu;
         if (response.data.menu.length > 0) {
+          this.activeId = response.data.menu.id;
+          for (let i = 1; i < response.data.menu.length; i++) {
+            if (this.activeId !== i) {
+              this.activeId = i;
+            }
+          }
+
           this.activeContent = this.menu[0].content;
+          // if (
+          //   typeof this.activeContent !== "undefined" ||
+          //   this.activeContent !== ""
+          // ) {
+          //   this.activeHeader = this.menu[0].content.header;
+          //   if (
+          //     typeof this.menu[0].content.header == "undefined" ||
+          //     this.activeHeader == ""
+          //   ) {
+          //     this.activeHeader == null;
+          //   }
+          //   if (typeof this.menu[0].content.short_text !== "undefined") {
+          //     this.activeShortText = this.menu[0].content.short_text;
+          //   }
+          //   this.activeFullText = this.menu[0].content.full_text;
+          //   if (typeof this.menu[0].content.full_text == "undefined") {
+          //     this.activeFullText == null;
+          //   }
+          //   if (typeof this.menu[0].content.image_url !== "undefined") {
+          //     this.activeImageUrl = this.menu[0].content.image_url;
+          //   }
+          //   if (
+          //     typeof this.menu[0].content.full_text_btn_title !== "undefined"
+          //   ) {
+          //     this.activeBtnTitle = this.menu[0].content.full_text_btn_title;
+          //   }
+          // }
         }
       });
+    },
+    selectMenu(index) {
+      this.activeContent = this.menu[index].content;
+      this.active = index;
     }
   },
+
   created() {
     this.fetchData();
   },
