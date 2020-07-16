@@ -138,13 +138,17 @@ export default {
     };
   },
   methods: {
-    fetchData() {
-      axios.get(this.baseUrl + "file.json").then(response => {
-        console.log(response);
+    async fetchData() {
+      axios.get("http://localhost:8080/file.json").then(response => {
+        this.jsonFile = response.data;
+        this.menu = response.data.menu;
+        if (response.data.menu.length > 0) {
+          this.activeContent = this.menu[0].content;
+        }
       });
     }
   },
-  mounted() {
+  created() {
     this.fetchData();
   },
   computed: {
