@@ -144,13 +144,12 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
   height: 100vh;
   background-color: orangered;
   color: #e5e5e5;
   text-transform: uppercase;
   &__img {
-    height: calc();
+    height: 70%;
     width: auto;
     margin: 50px;
   }

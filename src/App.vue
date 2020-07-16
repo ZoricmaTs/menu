@@ -60,6 +60,7 @@ body {
 </style>
 
 <script>
+import axios from "axios";
 import Content from "@/components/Content.vue";
 export default {
   components: {
@@ -67,6 +68,7 @@ export default {
   },
   data() {
     return {
+      baseUrl: process.env.VUE_APP_BASE_URL,
       active: 1,
       openContent: false,
       menu: [
@@ -135,8 +137,16 @@ export default {
       ]
     };
   },
-  methods: {},
-  mounted() {},
+  methods: {
+    fetchData() {
+      axios.get(this.baseUrl + "file.json").then(response => {
+        console.log(response);
+      });
+    }
+  },
+  mounted() {
+    this.fetchData();
+  },
   computed: {
     total() {
       return this.menu.length;
