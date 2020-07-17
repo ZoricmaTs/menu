@@ -1,6 +1,8 @@
 <template>
   <section class="content">
-    <img class="content__img" :src="item.image_url" v-if="item.image_url" />
+    <div class="content__block-img">
+      <img class="content__img" :src="item.image_url" v-if="item.image_url" />
+    </div>
     <div class="content__block-text">
       <header class="content__header" v-if="item.header">{{item.header}}</header>
       <p class="content__short-text" v-if="item.short_text">{{item.short_text}}</p>

@@ -68,7 +68,7 @@ export default {
   },
   data() {
     return {
-      active: 1,
+      active: 0,
       activeContent: {},
       openContent: false,
       menu: []
@@ -79,46 +79,22 @@ export default {
       axios.get("http://localhost:8080/file.json").then(response => {
         this.menu = response.data.menu;
         if (response.data.menu.length > 0) {
-          this.activeId = response.data.menu.id;
-          for (let i = 1; i < response.data.menu.length; i++) {
-            if (this.activeId !== i) {
-              this.activeId = i;
-            }
-          }
+          let menu = this.menu[0];
 
-          this.activeContent = this.menu[0].content;
-          // if (
-          //   typeof this.activeContent !== "undefined" ||
-          //   this.activeContent !== ""
-          // ) {
-          //   this.activeHeader = this.menu[0].content.header;
-          //   if (
-          //     typeof this.menu[0].content.header == "undefined" ||
-          //     this.activeHeader == ""
-          //   ) {
-          //     this.activeHeader == null;
-          //   }
-          //   if (typeof this.menu[0].content.short_text !== "undefined") {
-          //     this.activeShortText = this.menu[0].content.short_text;
-          //   }
-          //   this.activeFullText = this.menu[0].content.full_text;
-          //   if (typeof this.menu[0].content.full_text == "undefined") {
-          //     this.activeFullText == null;
-          //   }
-          //   if (typeof this.menu[0].content.image_url !== "undefined") {
-          //     this.activeImageUrl = this.menu[0].content.image_url;
-          //   }
-          //   if (
-          //     typeof this.menu[0].content.full_text_btn_title !== "undefined"
-          //   ) {
-          //     this.activeBtnTitle = this.menu[0].content.full_text_btn_title;
-          //   }
-          // }
+          if (typeof menu.content !== "undefined") {
+            this.activeContent = menu.content;
+          }
         }
       });
     },
     selectMenu(index) {
-      this.activeContent = this.menu[index].content;
+      let menu = this.menu[index];
+      if (typeof menu.content !== "undefined") {
+        this.activeContent = menu.content;
+      } else {
+        this.activeContent = {};
+      }
+
       this.active = index;
     }
   },
